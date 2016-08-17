@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: test shellshock
+    shell: "export evil='() { :;}; echo vulnerable'; bash -c echo;"
+    register: result
+
+  - name: Vulnerable
+    fail: msg="Vulnerable!"
+    when: result.stdout == 'vulnerable'
+
+  - name: NOT Vulnerable
+    debug: msg="NOT Vulnerable"
+    when: result.stdout != 'vulnerable'

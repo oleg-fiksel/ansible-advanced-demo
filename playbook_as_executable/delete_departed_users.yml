@@ -1,0 +1,10 @@
+#!/usr/bin/ansible-playbook
+---
+- hosts: all
+  gather_facts: false
+  vars_files:
+  - departed_users.yml
+  tasks:
+  - name: Delete departed users and all it's files
+    user: name={{item}} state=absent remove=yes
+    with_items: "{{departed}}"

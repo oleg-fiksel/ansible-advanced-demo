@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: "name"
+      prompt: "What is your name?"
+      private: no
+  tasks:
+  - name: Very secure user validation
+    fail:
+      msg: "You are not allowed to run this playbook, {{name}}!"
+    when: "name != 'Oleg'"

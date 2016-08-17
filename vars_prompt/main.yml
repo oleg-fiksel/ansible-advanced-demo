@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: "name"
+      prompt: "What is your name?"
+      private: no
+    - name: "location"
+      prompt: "What is you location?"
+      private: no
+  tasks:
+    - debug:
+        msg: "{{name}}, let me think for a moment..."
+    - pause:
+        seconds: 10
+    - debug:
+        msg: "Let me guess, you are now at {{location}}?"

@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: "name"
+      prompt: "What is your name?"
+      private: no
+  tasks:
+  - name: Very secure user validation
+    assert:
+      that: "name == 'Oleg'"

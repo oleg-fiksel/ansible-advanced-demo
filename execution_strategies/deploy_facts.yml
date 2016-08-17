@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+  - debug:
+      msg: "{{ ansible_local['times']['general'] }}"
+    ignore_errors: True
+  - file:
+      path: '/etc/ansible/facts.d'
+      state: directory
+  - copy:
+      src: "files/{{ inventory_hostname }}.fact"
+      dest: "/etc/ansible/facts.d/times.fact"
